@@ -6,7 +6,7 @@ export default require('maco').template(leetcode, React);
 function leetcode(props) {
   var model = props.model;
 
-  var link = 'https://github.com/blocage/leetcode-algorithms/tree/gh-pages/' + encodeURIComponent(model.name);
+  var link = 'https://github.com/blocage/leetcode-algorithms/tree/main/' + encodeURIComponent(model.name);
   var linkText = model.name;
 
   return commonPackageTemplate(model, link, linkText);
