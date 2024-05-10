@@ -23,3 +23,6 @@ jobs:
 
       - name: Deploy
         run: npm run build
+
+      - name: Start
+        run: npm run start
