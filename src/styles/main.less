@@ -1,0 +1,238 @@
+// todo: remove duplication, refactor
+@import "~bootstrap/less/bootstrap";
+@import "./variables.less";
+@import "./steering.less";
+@import "./nodeDetails.less";
+@import "./search.less";
+
+body {
+  background-color: @background;
+  font-family: 'Roboto', sans-serif;
+}
+
+#app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.graph-full-size {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  outline:none;
+}
+
+h1, h2 {
+  color: #efefef;
+}
+
+h4 {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.window-container {
+  background-color: rgba(0,0,0, 0.8);
+  color: #7F7F7F;
+  position: absolute;
+}
+
+.window-list-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 200px;
+}
+
+.node-focus {
+  cursor: pointer;
+}
+
+.search-results-window {
+  left: 16px;
+  top: 47px;
+  padding: 10px;
+  width: 395px;
+}
+
+.degree-results-window {
+  left: 16px;
+  bottom: 87px;
+  padding: 10px;
+  width: 395px;
+}
+
+.no-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: @screen-sm-min) {
+  .degree-results-window {
+    display: none;
+  }
+}
+
+.window-title {
+  strong {
+    color: @foreground;
+    font-weight: normal;
+    font-size: 1.2em;
+  }
+  .node-name {
+    color: @foreground;
+  }
+}
+
+.label {
+  color: @foreground;
+  background: @background;
+  position: absolute;
+  z-index: 1;
+}
+
+.loading {
+  padding: 10px;
+  left: 10px;
+  top: 48px;
+}
+
+.about {
+  padding: 10px;
+  right: 10px;
+  top: 0px;
+}
+
+@media (max-width: @screen-sm-min) {
+  .about {
+    padding: 10px;
+    right: 13px;
+    bottom: 22px;
+    top: inherit;
+  }
+}
+
+.node-hover-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: @foreground;
+  padding: 4px 10px;;
+  pointer-events: none;
+  min-width: 200px;
+  border: 1px solid @border-color;
+
+  span {
+    margin: 0 5px;
+  }
+}
+
+.in-degree {
+  color: #90EE90;
+  cursor: pointer;
+}
+
+.window-indegree {
+  color: #90EE90;
+}
+
+.window-outdegree {
+  color: #F08080;
+}
+
+.out-degree {
+  color: #F08080;
+  cursor: pointer;
+}
+
+.node-hover-list {
+  position: absolute;
+  background: @background;
+  right: -20px;
+  bottom: 10px;
+  height: 150px;
+  color: @foreground;
+  padding: 4px;
+  pointer-events: none;
+  width: 220px;
+  overflow-y: scroll;
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+a.reset-color,
+a.reset-color:hover,
+a.reset-color:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.media:hover, a.media:focus {
+  text-decoration: none;
+  color: #FF008C;
+  border: none;
+}
+
+a.media {
+  color: @foreground;
+  background-color: black;
+  border: none;
+}
+
+.error {
+  color: pink;
+}
+
+.error-details {
+  color: wheat;
+}
+
+.navigation-help {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 7px;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Roboto', sans-serif;
+  pointer-events: none;
+  h3 {
+    color: @foreground;
+    border-bottom: 1px solid white;
+    padding-bottom: 6px;
+    margin-top: 2px;
+  }
+  code {
+    font-family: 'PT Sans', sans-serif;
+    font-size: 100%;
+    color: @foreground;
+    background-color: inherit;
+  }
+  code.important-key {
+    color: #90EE90;
+  }
+  td {
+    color: #999;
+    text-align: right;
+  }
+  td:nth-child(even) {
+    text-align: left;
+
+  }
+  tr.spacer-row {
+    border-bottom: 10px solid transparent;
+  }
+}
