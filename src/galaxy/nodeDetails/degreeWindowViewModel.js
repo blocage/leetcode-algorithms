@@ -40,7 +40,7 @@ function getDegreeName(connectionType, count) {
 
 function dependencyName(connectionType, count) {
   if (connectionType === 'in') {
-    return count === 1 ? 'solution' : 'dependents';
+    return count === 1 ? 'solution' : 'solutions';
   }
   return count === 1 ? 'soltuion' : 'dependencies';
 }

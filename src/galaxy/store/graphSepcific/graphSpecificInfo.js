@@ -23,7 +23,7 @@ function PackagesGraph(graphName) {
   DefaultGraph.call(this, graphName);
 
   this.getInDegreeLabel = function getInDegreeLabel(inDegreeValue) {
-    return inDegreeValue === 1 ? 'dependent' : 'dependents';
+    return inDegreeValue === 1 ? 'solution' : 'solutions';
   };
 
   this.getOutDegreeLabel = function getInDegreeLabel(outDegreeValue) {
