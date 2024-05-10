@@ -6,9 +6,13 @@ on:
       - main
   workflow_dispatch:
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+       run:
+         working-directory: ./
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -23,6 +27,3 @@ jobs:
 
       - name: Deploy
         run: npm run build
-
-      - name: Start
-        run: npm run start
