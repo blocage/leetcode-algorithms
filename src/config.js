@@ -1,3 +1,3 @@
 export default {
-  dataUrl: 'https://github.com/blocage/leetcode-algorithms/tree/main/data/'
+  dataUrl: '//raw.githubusercontent.com/blocage/leetcode-algorithms/main/data/'
 };
