@@ -8,6 +8,7 @@ pids
 *.pid
 *.seed
 *.eot
+*.svg
 *.woff*
 *.eot
 *.ttf
