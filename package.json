@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "mkdir -p ./build && cp ./src/index.html ./build/ && webpack -p --config webpack.production.config.js",
-    "start": "PORT=8081 node dev-server.js"
+    "start": "PORT=8081 node dev-server.js",
+    "deploy": "npm run build && cp -r build/* . && touch .nojekyll && git add . && git commit -m 'Deploy to GitHub Pages' && git push origin HEAD:gh-pages"
   },
   "author": "David Kobalia",
   "license": "MIT",
