@@ -8,7 +8,7 @@ var defaultConfig = {
   pos: {x : 0, y: 0, z: 0 },
   lookAt: {x: 0, y: 0, z: 0, w: 1},
   showLinks: true,
-  maxVisibleDistance: 150,
+  maxVisibleDistance: 1000,
   scale: 1.75,
   manifestVersion: 0
 };

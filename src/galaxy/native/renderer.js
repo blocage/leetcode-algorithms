@@ -27,12 +27,13 @@ import appConfig from './appConfig.js';
 export default sceneRenderer;
 
 var defaultNodeColor = 0xffffffff;
+var parentNodeColor = 0x0000ffff;
 
 var highlightNodeColor = 0xff0000ff;
 
 function sceneRenderer(container) {
   var renderer, positions, graphModel, touchControl;
-  var hitTest, lastHighlight, lastHighlightSize, cameraPosition;
+  var hitTest, lastHighlight, lastHighlightSize, cameraPosition, lastColor;
   var lineView, links, lineViewNeedsUpdate;
   var queryUpdateId = setInterval(updateQuery, 200);
 
@@ -159,16 +160,21 @@ function sceneRenderer(container) {
   function updateSizes(outLinks, inLinks) {
     var maxInDegree = getMaxSize(inLinks);
     var view = renderer.getParticleView();
+    var colors = view.colors();
     var sizes = view.sizes();
     for (var i = 0; i < sizes.length; ++i) {
       var degree = inLinks[i];
+
+      if (outLinks[i]) colorNode(i * 3, colors, getRandomColor());
       if (degree) {
+        colorNode(i * 3, colors, parentNodeColor);
         sizes[i] = ((200 / maxInDegree) * degree.length + 15);
       } else {
         sizes[i] = 30;
       }
     }
     view.sizes(sizes);
+    view.colors(colors);
   }
 
   function getMaxSize(sparseArray) {
@@ -255,13 +261,14 @@ function sceneRenderer(container) {
     var sizes = view.sizes();
 
     if (lastHighlight !== undefined) {
-      colorNode(lastHighlight, colors, defaultNodeColor);
+      colorNode(lastHighlight, colors, lastColor);
       sizes[lastHighlight/3] = lastHighlightSize;
     }
 
     lastHighlight = nodeIndex;
 
     if (lastHighlight !== undefined) {
+      lastColor = getNodeColor(lastHighlight, colors);
       colorNode(lastHighlight, colors, highlightNodeColor);
       lastHighlightSize = sizes[lastHighlight/3];
       sizes[lastHighlight/3] *= 1.5;
@@ -291,7 +298,7 @@ function sceneRenderer(container) {
     colors[colorOffset + 0] = (color >> 24) & 0xff;
     colors[colorOffset + 1] = (color >> 16) & 0xff;
     colors[colorOffset + 2] = (color >> 8) & 0xff;
-    colors[colorOffset + 3] = (color & 0xff);
+    colors[colorOffset + 3] = 255;
   }
 
   function highlightLinks(links, color) {
@@ -326,6 +333,22 @@ function sceneRenderer(container) {
       // get actual index:
       return nearestIndex/3
     }
+  }
+
+  function getRandomColor() {
+    var minComponentValue = 30; // Minimum value for each RGB component
+
+    var red = Math.floor(Math.random() * (0xFF - minComponentValue + 1)) + minComponentValue;
+    var green = Math.floor(Math.random() * (0xFF - minComponentValue + 1)) + minComponentValue;
+    var blue = Math.floor(Math.random() * (0xFF - minComponentValue + 1)) + minComponentValue;
+
+    return (255 << 24) + (red << 16) + (green << 8) + 255;
+  }
+
+  function getNodeColor(nodeId, colors) {
+    var colorOffset = (nodeId/3) * 4;
+    var [R, G, B, A] = colors.slice(colorOffset, colorOffset + 4);
+    return (R * 16777216) + (G * 65536) + (B * 256) + A;
   }
 
   function destroy() {
