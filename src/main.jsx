@@ -9,6 +9,7 @@ import WelcomePage from './welcome';
 import GalaxyPage from './galaxy/galaxyPage.jsx';
 import { Router, Route, browserHistory } from 'react-router';
 
+
 render(
   <Router history={browserHistory}>
     <Route path='/' component={WelcomePage}/>
